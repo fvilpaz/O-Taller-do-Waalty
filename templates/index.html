@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="gl">
+<head>
+    <meta charset="UTF-8">
+    <title>O TALLER DO WALTY</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Benvidos ao taller de Walty</h1>
+    
+    <form action="{{ url_for('submit') }}" method="post">
+        <label for="service">Que querrías facer no teu vehículo?</label><br>
+        <select name="service" id="service">
+            <option value="mantenimiento">Mantenimiento</option>
+            <option value="mecanica_general">Mecánica General</option>
+            <option value="outros">Outros</option>
+        </select><br><br>
+
+        <label for="date">Elixe unha data:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="time">Elixe unha hora:</label><br>
+        <input type="time" id="time" name="time" required><br><br>
+
+        <label for="payment">Método de pago:</label><br>
+        <select name="payment" id="payment">
+            <option value="efectivo">Efectivo</option>
+            <option value="tarjeta">Tarjeta</option>
+            <option value="bitcoin">Bitcoin</option>
+        </select><br><br>
+
+        <button type="submit">Pedir cita</button>
+    </form>
+
+    <h2>Citas solicitadas:</h2>
+    <ul>
+        {% for appointment in appointments %}
+            <li>{{ appointment.service }} - {{ appointment.date }} - {{ appointment.time }} - {{ appointment.payment }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
